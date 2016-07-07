@@ -5,16 +5,24 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import com.company.Deck.*;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by christopherkeeley on 7/6/16.
  */
 public class Round extends Game{
         private int points;
+        private Deck deck = new Deck();
+        private Hand hand = new Hand();
 
+        public Round ()
+        {
+
+        }
         public void playRound() throws Exception
         {
-            Deck deck = new Deck();
-            Hand hand = new Hand();
+
 
             deck.getDeck();
             deck.showCardsInDeck();
@@ -57,8 +65,7 @@ public class Round extends Game{
         public HandValue checkHand ()
         {
             if (isRoyalFlush())
-            {
-                points += 200000;
+            {   points += 200000;
                return HandValue.RoyalFlush;
             }
             if (isStraightFlush())
@@ -78,6 +85,8 @@ public class Round extends Game{
             }
             if (isFlush())
             {
+
+
                 points += 200;
                 return HandValue.Flush;
             }
@@ -109,7 +118,8 @@ public class Round extends Game{
         }
         private boolean isStraightFlush()
         {
-            return false;
+
+            return (isStraight() && isFlush());
         }
         private boolean isFourOfKind()
         {
@@ -121,14 +131,51 @@ public class Round extends Game{
         }
         private boolean isFlush()
         {
-            return true;
+            ArrayList<Suit> suits = new ArrayList<>();
+            for (Card c: hand.getHand())
+            {
+                suits.add(c.getSuit());
+            }
+            int frequency = Collections.frequency(suits, suits.get(0));
+            return (frequency == suits.size());
+
         }
         private boolean isStraight()
         {
-            return false;
+            ArrayList<Integer> cards = new ArrayList<>();
+
+            for (Card c: hand.getHand())
+            {
+                cards.add(c.getValue());
+                Collections.sort(cards);
+
+            }
+            for (int i = 0; i < cards.size() - 1; i++)
+            {
+               if ((cards.get(i) + 1)!= cards.get(i+1))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
         private boolean isThreeOfAKind()
         {
+            ArrayList<Rank> cards = new ArrayList<>();
+
+            for (Card c: hand.getHand())
+            {
+                int i = 0;
+                cards.add(c.getRank());
+                int frequency = Collections.frequency(cards, cards.get(i));
+                i++;
+                if (frequency == 3)
+                {
+                    return true;
+                }
+
+            }
             return false;
         }
         private boolean isTwoPair()

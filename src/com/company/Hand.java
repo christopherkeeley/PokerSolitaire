@@ -22,6 +22,7 @@ public class Hand
         myHand = new ArrayList<>();
 
     }
+
     public void drawCards(int numberOfCards, Deck myDeck)
     {
         List<Card> shuffledDeck =  myDeck.getDeck();
