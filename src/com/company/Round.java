@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import com.company.Deck.*;
 
 import java.util.Collections;
-import java.util.List;
+
 
 /**
  * Created by christopherkeeley on 7/6/16.
@@ -23,18 +23,17 @@ public class Round extends Game{
         public void playRound() throws Exception
         {
 
-
+            System.out.println("Your current score is: " + getCurrentScore());
             deck.getDeck();
-            deck.showCardsInDeck();
+            //deck.showCardsInDeck();
             hand.drawCards(5,deck);
             ArrayList<Integer> cardsToDiscard = hand.cardsToDiscard();
             int cardsToDraw = cardsToDiscard.size();
-            hand.discardCards(cardsToDiscard, deck); //discard first card in hand
+            hand.discardCards(cardsToDiscard, deck); //discard cards
             hand.drawCards(cardsToDraw, deck);
             HandValue handValue = checkHand();
             System.out.println("Your final hand is " + handValue);
             System.out.println("Your score has changed by " + points);
-            System.out.println(getCurrentScore());
             int updatedScore = getCurrentScore() + points;
             setCurrentScore(updatedScore);
             System.out.println("Your new score is: " + updatedScore);
@@ -112,10 +111,22 @@ public class Round extends Game{
             points -= 5;
             return HandValue.BadHand;
         }
+
+
         private boolean isRoyalFlush()
         {
-            return false;
+            ArrayList<Integer> cards = new ArrayList<>();
+            for (Card c: hand.getHand())
+            {
+                cards.add(c.getValue());
+
+
+            }
+
+            return (isStraightFlush() && (Collections.max(cards) == 14)); // checks for straight flush with high card of an ace
         }
+
+
         private boolean isStraightFlush()
         {
 
@@ -123,11 +134,34 @@ public class Round extends Game{
         }
         private boolean isFourOfKind()
         {
-            return false;
+            ArrayList<Integer> cards = new ArrayList<>();
+            boolean check1, check2;
+            for (Card c: hand.getHand())
+            {
+                cards.add(c.getValue());
+
+
+            }
+            Collections.sort(cards);
+
+            check1 =  cards.get(0).equals(cards.get(1)) && cards.get(2).equals(cards.get(3)) && cards.get(0).equals(cards.get(3));
+            check2 =  cards.get(1).equals(cards.get(2)) && cards.get(3).equals(cards.get(4)) && cards.get(1).equals(cards.get(4));
+            return check1 || check2;
         }
         private boolean isFullHouse()
         {
-            return false;
+            ArrayList<Integer> cards = new ArrayList<>();
+            boolean check1, check2;
+            for (Card c: hand.getHand())
+            {
+                cards.add(c.getValue());
+
+
+            }
+            Collections.sort(cards);
+            check1 = cards.get(0).equals(cards.get(1)) && cards.get(1).equals(cards.get(2)) && cards.get(3).equals(cards.get(4));
+            check2 = cards.get(0).equals(cards.get(1)) && cards.get(2).equals(cards.get(3)) && cards.get(3).equals(cards.get(4));
+            return check1 || check2;
         }
         private boolean isFlush()
         {
@@ -147,9 +181,10 @@ public class Round extends Game{
             for (Card c: hand.getHand())
             {
                 cards.add(c.getValue());
-                Collections.sort(cards);
+
 
             }
+            Collections.sort(cards);
             for (int i = 0; i < cards.size() - 1; i++)
             {
                if ((cards.get(i) + 1)!= cards.get(i+1))
@@ -163,10 +198,10 @@ public class Round extends Game{
         private boolean isThreeOfAKind()
         {
             ArrayList<Rank> cards = new ArrayList<>();
-
+            int i = 0;
             for (Card c: hand.getHand())
             {
-                int i = 0;
+
                 cards.add(c.getRank());
                 int frequency = Collections.frequency(cards, cards.get(i));
                 i++;
@@ -180,12 +215,59 @@ public class Round extends Game{
         }
         private boolean isTwoPair()
         {
-            return false;
+            ArrayList<Integer> cards = new ArrayList<>();
+            boolean check1, check2, check3;
+
+            for (Card c: hand.getHand())
+            {
+                cards.add(c.getValue());
+
+            }
+            Collections.sort(cards);
+            check1 = (cards.get(0).equals(cards.get(1))) && (cards.get(2).equals(cards.get(3)));
+            check2 = (cards.get(0).equals(cards.get(1))) && (cards.get(3).equals(cards.get(4)));
+            check3 = (cards.get(1).equals(cards.get(2))) && (cards.get(3).equals(cards.get(4)));
+            return (check1 || check2 || check3);
+
         }
+
+
         private boolean isJackHighPair()
         {
+            ArrayList<Integer> cards = new ArrayList<>();
+            boolean check1, check2, check3, check4;
+
+            for (Card c: hand.getHand())
+            {
+                cards.add(c.getValue());
+
+
+            }
+            Collections.sort(cards);
+            check1 = (cards.get(0).equals(cards.get(1)));
+                if (check1)
+                {
+                    return cards.get(1) > 10; //returning true if check1 is true and the pair contains higher than a 10
+                }
+            check2 = (cards.get(1).equals(cards.get(2)));
+            if (check2)
+            {
+                return cards.get(2) > 10; //returning true if check1 is true and the pair contains higher than a 10
+            }
+            check3 = (cards.get(2).equals(cards.get(3)));
+            if (check3)
+            {
+                return cards.get(3) > 10; //returning true if check1 is true and the pair contains higher than a 10
+            }
+            check4 = (cards.get(3).equals(cards.get(4)));
+            if (check4)
+            {
+                return cards.get(4) > 10; //returning true if check1 is true and the pair contains higher than a 10
+            }
             return false;
+
         }
+
 
 
 

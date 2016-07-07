@@ -28,7 +28,7 @@ public class Game {
     }
     public void setCurrentScore(int updatedScore)
     {
-        this.currentScore = updatedScore;
+        currentScore = updatedScore;
     }
 
 

@@ -70,7 +70,7 @@ public class Deck {
     }
     public void setDiscardPile(Card card)
     {
-        System.out.println("SetDiscardPile Card is " + card.getRank() + " of " + card.getSuit());
+        //System.out.println("SetDiscardPile Card is " + card.getRank() + " of " + card.getSuit());
         discardPile.add(card);
     }
 
@@ -83,8 +83,8 @@ public class Deck {
     public void dealCard(){
         this.usedCards.add(newDeck.get(0));
         int len = usedCards.size() - 1;
-        System.out.println("add this card to used cards " + usedCards.get(len).getRank() + " of " + usedCards.get(len).getSuit());
-        System.out.println();
+       // System.out.println("add this card to used cards " + usedCards.get(len).getRank() + " of " + usedCards.get(len).getSuit());
+       // System.out.println();
         this.newDeck.remove(0);
 
 

@@ -34,9 +34,10 @@ public class Hand
             myDeck.dealCard();
 
         }
+
         for (Card c : myHand)
         {
-            System.out.println(c.getRank() + " of " + c.getSuit() + " is card " + myHand.indexOf(c) + " in my hand.");
+           System.out.println(c.getRank() + " of " + c.getSuit() + " is card " + myHand.indexOf(c) + " in my hand.");
         }
         System.out.println();
     }
@@ -66,11 +67,7 @@ public class Hand
     }
     public ArrayList<Integer> cardsToDiscard() throws Exception
     {
-        for (Card c : myHand)
-        {
-            System.out.println(c.getRank() + " of " + c.getSuit() +" is card " + myHand.indexOf(c) + " in my hand.");
 
-        }
         System.out.println();
         System.out.println("Please pick the cards you want to discard, separated by spaces");
         System.out.println();
