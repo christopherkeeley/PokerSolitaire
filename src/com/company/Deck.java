@@ -84,6 +84,7 @@ public class Deck {
         this.usedCards.add(newDeck.get(0));
         int len = usedCards.size() - 1;
         System.out.println("add this card to used cards " + usedCards.get(len).getRank() + " of " + usedCards.get(len).getSuit());
+        System.out.println();
         this.newDeck.remove(0);
 
 
