@@ -93,9 +93,18 @@ public class Hand
             discardList = stringToIntegerArrayList(s);
             Collections.sort(discardList);
             bError = false;
+            for (int i: discardList)
+            {
+                if (i < 0 || i > 4) {
+                    bError = true;
+                    System.out.println("Sorry, you need to pick a number between 0 and 4");
+                    showHand();
+                }
+            }
 
         } catch (Exception e) {
             System.out.println("Error " + e + " Please Try again");
+            showHand();
         }
     } while (bError);
         return discardList;
