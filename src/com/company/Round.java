@@ -11,7 +11,7 @@ import java.util.Collections;
 /**
  * Created by christopherkeeley on 7/6/16.
  */
-public class Round extends Game{
+public class Round extends Game {
         private int points;
         private Deck deck = new Deck();
         private Hand hand = new Hand();
@@ -23,14 +23,16 @@ public class Round extends Game{
         public void playRound() throws Exception
         {
 
-            System.out.println("Your current score is: " + getCurrentScore());
+            System.out.println("Your current score is: " + getCurrentScore() + "          Round: " + getRoundsPlayed());
             deck.getDeck();
             //deck.showCardsInDeck();
             hand.drawCards(5,deck);
+            hand.showHand();
             ArrayList<Integer> cardsToDiscard = hand.cardsToDiscard();
             int cardsToDraw = cardsToDiscard.size();
             hand.discardCards(cardsToDiscard, deck); //discard cards
             hand.drawCards(cardsToDraw, deck);
+            hand.showHand();
             HandValue handValue = checkHand();
             System.out.println("Your final hand is " + handValue);
             System.out.println("Your score has changed by " + points);
@@ -39,6 +41,7 @@ public class Round extends Game{
             System.out.println("Your new score is: " + updatedScore);
 
         }
+
         public Boolean doPlayAgain() throws Exception
         {
             System.out.println("Do you want to play again? Input N or No if not");
@@ -142,7 +145,7 @@ public class Round extends Game{
 
 
             }
-            Collections.sort(cards);
+            //Collections.sort(cards);
 
             check1 =  cards.get(0).equals(cards.get(1)) && cards.get(2).equals(cards.get(3)) && cards.get(0).equals(cards.get(3));
             check2 =  cards.get(1).equals(cards.get(2)) && cards.get(3).equals(cards.get(4)) && cards.get(1).equals(cards.get(4));
@@ -158,7 +161,7 @@ public class Round extends Game{
 
 
             }
-            Collections.sort(cards);
+            //Collections.sort(cards);
             check1 = cards.get(0).equals(cards.get(1)) && cards.get(1).equals(cards.get(2)) && cards.get(3).equals(cards.get(4));
             check2 = cards.get(0).equals(cards.get(1)) && cards.get(2).equals(cards.get(3)) && cards.get(3).equals(cards.get(4));
             return check1 || check2;
@@ -184,7 +187,7 @@ public class Round extends Game{
 
 
             }
-            Collections.sort(cards);
+            //Collections.sort(cards);
             for (int i = 0; i < cards.size() - 1; i++)
             {
                if ((cards.get(i) + 1)!= cards.get(i+1))
@@ -223,7 +226,7 @@ public class Round extends Game{
                 cards.add(c.getValue());
 
             }
-            Collections.sort(cards);
+           // Collections.sort(cards);
             check1 = (cards.get(0).equals(cards.get(1))) && (cards.get(2).equals(cards.get(3)));
             check2 = (cards.get(0).equals(cards.get(1))) && (cards.get(3).equals(cards.get(4)));
             check3 = (cards.get(1).equals(cards.get(2))) && (cards.get(3).equals(cards.get(4)));
@@ -243,7 +246,7 @@ public class Round extends Game{
 
 
             }
-            Collections.sort(cards);
+            //Collections.sort(cards);
             check1 = (cards.get(0).equals(cards.get(1)));
                 if (check1)
                 {

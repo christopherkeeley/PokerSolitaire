@@ -22,6 +22,7 @@ public class Game {
     {
         roundsPlayed += 1;
     }
+    public int getRoundsPlayed () {return roundsPlayed;}
     public int getCurrentScore()
     {
         return currentScore;
